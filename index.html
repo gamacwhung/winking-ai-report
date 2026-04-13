@@ -47,6 +47,8 @@
   .chart-bar .bar { height: 22px; border-radius: 4px; background: var(--primary); min-width: 4px; }
   .chart-bar .val { font-size: 12px; margin-left: 8px; color: var(--gray); }
   @media print { .container { padding: 20px; } h1 { font-size: 24px; } }
+  .prompt { background: #f1f5f9; border-left: 3px solid #94a3b8; padding: 6px 12px; margin: 4px 0 8px 8px; font-size: 13px; color: #475569; border-radius: 0 4px 4px 0; line-height: 1.5; }
+  .prompt::before { content: "💬 "; }
 </style>
 </head>
 <body>
@@ -130,23 +132,33 @@
 <p><strong>使用模式：</strong>從 Unity MCP 連線確認 → 程式碼搜尋 → 系統設計諮詢 → Shader/渲染技術方案，<span class="highlight">持續追問、逐層深入，並多次糾正 AI 錯誤</span>。</p>
 <p><strong>亮點行為：</strong></p>
 <ul>
-  <li><strong>會主動糾正 AI 的錯誤</strong> — AI 把 <code>SyncWeatherState</code> 綁到事件上時，他指出「這樣不就不能平滑」，說明他清楚系統設計意圖</li>
-  <li><strong>會提供領域知識作為約束條件</strong> — 例如提醒「IsIntoStore 是正在店中活動的意思，門外也可能是 true」、「客人不適合直接 SetColor，因為其他功能也會用」</li>
+  <li><strong>會主動糾正 AI 的錯誤</strong> — AI 把 <code>SyncWeatherState</code> 綁到事件上時，他指出問題</li>
+  <li><strong>會提供領域知識作為約束條件</strong> — 主動給 AI 背景資訊，避免錯誤假設</li>
   <li><strong>會延伸探索</strong> — 從進出門邏輯搜尋到整個晝夜系統的設計與 Shader 除錯</li>
   <li><strong>會問周邊問題</strong> — 好奇 Token 限制和計費方式（顯示對 AI 工具本身也在摸索）</li>
 </ul>
-<p><strong>涵蓋的 AI 使用場景（10 輪對話）：</strong></p>
+<p><strong>10 輪對話原文：</strong></p>
 <ol>
-  <li>確認 Unity MCP 連線狀態</li>
-  <li>搜尋遊戲邏輯（客人/店員進出門判斷）</li>
-  <li>詢問 Token 限制</li>
-  <li>詢問計費方式</li>
-  <li>天氣/晝夜系統整體規劃</li>
-  <li>天氣/晝夜系統實作分析與染色方案</li>
-  <li>糾正 AI 的 SyncWeatherState 平滑問題</li>
-  <li>IDE 操作教學（Cursor 的 Go to Definition）</li>
-  <li>糾正 AI 的 SetColor 設計問題</li>
-  <li>Shader 渲染問題除錯（_PostprocessingMode Disable 模型變黑）</li>
+  <li>確認 Unity MCP 連線
+    <div class="prompt">你現在有感覺跟Unity連在一起嗎</div></li>
+  <li>搜尋遊戲邏輯（附帶領域知識）
+    <div class="prompt">嘗試找到該專案中 客人跟店員進出門那瞬間的判斷。要注意的是 IsIntoStore是正在店中活動的意思，店外也有商品 所以在門外IsIntoStore也可能是true</div></li>
+  <li>詢問 Token 限制
+    <div class="prompt">你Token會用完嗎</div></li>
+  <li>詢問計費方式
+    <div class="prompt">你目前的計費是免費嗎</div></li>
+  <li>晝夜系統規劃
+    <div class="prompt">城市在CD_URP 想在 店外的客人 店員 貨架或廁所之類的商店物品還有城外的建築物跟店外表 能做出晝夜循環的感覺 該做的有什麼</div></li>
+  <li>天氣/晝夜系統實作分析
+    <div class="prompt">那幫我看天氣系統附屬的晝夜系統的部分 每20分鐘 切換白天黃昏夜晚 目前有寫CD_URP的shader 只是在美術那邊還沒傳 有PS_Light有做只在晚上開燈的感覺 現在要在店員 客人 商品貨櫃 商店 也能做染色 有預計可以使用後處理</div></li>
+  <li>糾正 AI 的平滑問題
+    <div class="prompt">你這樣不就不能平滑 SyncWeatherState 是用來同步剛登入或剛回來時狀態</div></li>
+  <li>IDE 操作問題
+    <div class="prompt">我沒辦法像VS 那樣右鍵找變數函示的來源</div></li>
+  <li>糾正 AI 的 SetColor 問題
+    <div class="prompt">客人不適合直接SetColor 1. 要平滑 2. 其他功能也有SetColor 如果在切換晝夜後使用那些功能顏色會跑掉</div></li>
+  <li>Shader 渲染問題除錯
+    <div class="prompt">我發現 _PostprocessingMode Disable 之後整個模型是黑的，我有先設置 Camera HDR 為 Use settings from Render Pipeline Asset 並確認 Render Pipeline Asset 本身已啟用 HDR。</div></li>
 </ol>
 </div>
 
@@ -154,17 +166,26 @@
 <div class="card">
 <h4>劉思源 — 品質把關最嚴謹的使用者</h4>
 <p><strong>使用模式：</strong>從編譯錯誤排查 → UI 架構分析 → 劇情系統分析 → 截圖讓 AI 分析腳本群。<span class="highlight">全程僅使用 AI 做分析，由人工決定是否修改</span>，是風險最低的使用模式。</p>
-<p><strong>具體場景（~9 輪對話）：</strong></p>
+<p><strong>9 輪對話原文：</strong></p>
 <ol>
-  <li>解決 CS0246 編譯錯誤（<code>BuildingPositionConfig</code> 找不到）</li>
-  <li>分析 <code>UIGVECardOverviewMain.cs</code>（GVE 卡牌總覽 UI）的職責、資料流與風險點</li>
-  <li>整理 <code>UIGVECardOverviewMain</code> 所有關聯類別的調用關係</li>
-  <li>分析 <code>GVECardsDropdownData</code>（篩選下拉 DTO）</li>
-  <li>分析 <code>UIGVEStrengthen.cs</code>（卡牌強化 UI）</li>
-  <li>分析劇情系統（PlotManager / PlotSystem）</li>
-  <li>分析劇情播放模組（PlotOptionPlayer / PlotTalkPlayer / PlotTitlePlayer / PlotVideoPlayer / UIPlotPlayer）</li>
-  <li>整理 <code>PlotTalkPlayer.cs</code> 可優化的部分</li>
-  <li>截圖讓 AI 分析 GVE Gameplay 整批腳本（UIGVEGameplay / GVEGameplay / UICard 系列等）</li>
+  <li>編譯錯誤排查
+    <div class="prompt">Assets\PS2\Gameplay\Store\ModelConfig.cs(16,16): error CS0246: The type or namespace name 'BuildingPositionConfig' could not be found (are you missing a using directive or an assembly reference?)</div></li>
+  <li>分析 GVE 卡牌總覽 UI
+    <div class="prompt">請分析 UIGVECardOverviewMain.cs</div></li>
+  <li>整理調用關係
+    <div class="prompt">請整理出與 UIGVECardOverviewMain 類別有關連的所有類別，之間的調用關係</div></li>
+  <li>分析篩選下拉 DTO
+    <div class="prompt">請分析 GVECardsDropdownData.cs</div></li>
+  <li>分析卡牌強化 UI
+    <div class="prompt">請分析 UIGVEStrengthen.cs</div></li>
+  <li>分析劇情系統
+    <div class="prompt">請再一次分析 PlotSystem.cs、PlotManager.cs</div></li>
+  <li>分析劇情播放模組（一次 5 個檔案）
+    <div class="prompt">請分析 PlotOptionPlayer.cs、PlotTalkPlayer.cs、PlotTitlePlayer.cs、PlotVideoPlayer.cs、UIPlotPlayer.cs</div></li>
+  <li>整理優化建議
+    <div class="prompt">請整理出現在的 PlotTalkPlayer.cs 可以優化的部分</div></li>
+  <li>截圖讓 AI 分析（附圖片）
+    <div class="prompt">請分析整理一下這些腳本的功能 [附 IDE 截圖]</div></li>
 </ol>
 <p><strong>亮點行為：</strong></p>
 <ul>
@@ -179,10 +200,11 @@
 <div class="card">
 <h4>趙健智</h4>
 <p><strong>使用模式：</strong>僅一次短對話，給出一個簡單的程式修改需求。</p>
-<p><strong>具體場景：</strong></p>
+<p><strong>1 輪對話原文：</strong></p>
 <ul>
-  <li>希望在 <code>PlotTalkPlayer.cs</code> 的 Play 函數新增 bool 參數（自動播放下一句）</li>
-  <li>同樣因工作區路徑問題，AI 無法定位檔案</li>
+  <li>功能需求
+    <div class="prompt">幫我將PlotTalkPlayer.cs的Play函數，新增bool參數，可以自動播放下一句，而不用玩家主動點擊</div></li>
+  <li>因工作區路徑問題，AI 無法定位檔案，對話中斷</li>
 </ul>
 </div>
 
@@ -190,18 +212,42 @@
 <div class="card">
 <h4>高偉傑 — 最完整的「分析→修改」流程</h4>
 <p><strong>使用模式：</strong>善用 <code>@</code> 語法附件檔案、從分析到修改的完整流程（分析 → 選方案 → 執行修改），<span class="highlight">是唯一走完「分析→確認→選方案→執行修改」完整流程的成員</span>。</p>
-<p><strong>具體場景（3 段對話共 8 輪）：</strong></p>
+<p><strong>3 段對話共 8 輪原文：</strong></p>
+
+<p><strong>第 1 段：GamePass 系統分析 + 跨平台修復</strong></p>
 <ol>
-  <li><strong>第 1 段</strong>：分析 GamePass 系統所有腳本（Manager / System / Data / Extension）</li>
-  <li><strong>第 1 段</strong>：修復 <code>UIGamePassPanel</code> 跨平台編譯錯誤（<code>#if UNITY_ANDROID</code> 在 Win 平台的 fallback）</li>
-  <li><strong>第 2 段</strong>：分析 <code>BuildingManager.Floor.cs</code> 與 <code>BuildingFloor.cs</code>，選擇 A 方案（防呆重構），並讓 AI 執行修改</li>
-  <li><strong>第 3 段</strong>：分析 <code>UIGVECardOverviewMain.cs</code> 與 <code>UIGVEStrengthen.cs</code>（與劉思源獨立重疊，顯示不同成員有相同的分析需求）</li>
+  <li>分析系統
+    <div class="prompt">分析下Assets\PS2\Gameplay\GamePass 裡面的東西 整理 下內容跟我說</div></li>
+  <li>修復跨平台編譯錯誤
+    <div class="prompt">當前因為 UIGamePassPanel 在243行使用了 "#if UNITY_ANDROID var iapId = passAttrDatea.InAppPurchaseIDAndroid; #elif UNITY_IOS var iapId = passAttrDatea.InAppPurchaseIDApple; #endif" 這段內容導致我原本預設wIn平台下做會報編譯錯誤，切換整個專案內容太消耗時間了，可以幫我暫時補充改善或迴避這問題嗎</div></li>
 </ol>
+
+<p><strong>第 2 段：Building 腳本分析 → 選方案 → 執行修改</strong></p>
+<ol start="3">
+  <li>分析腳本
+    <div class="prompt">@BuildingManager.Floor.cs (1-213) @BuildingFloor.cs (1-279) 請幫我分析這兩個腳本</div></li>
+  <li>AI 提供 A/B 方案後確認執行
+    <div class="prompt">好</div></li>
+  <li>選擇 A 方案（防呆重構）
+    <div class="prompt">A</div></li>
+</ol>
+
+<p><strong>第 3 段：GVE 系統分析</strong></p>
+<ol start="6">
+  <li>嘗試讓 AI 分析預覽中的腳本（失敗）
+    <div class="prompt">你可以分析我當前視窗旁邊正在預覽的腳本嗎?</div></li>
+  <li>改用 @ 語法指定檔案
+    <div class="prompt">@UIGVECardOverviewMain.cs (1-382) 請幫我分析這個腳本</div></li>
+  <li>接續分析
+    <div class="prompt">@UIGVEStrengthen.cs (1-109) 接續分析這個腳本</div></li>
+</ol>
+
 <p><strong>亮點行為：</strong></p>
 <ul>
   <li>善用 <code>@</code> 語法明確指定檔案範圍和行數，讓 AI 精準定位</li>
   <li>能在 AI 給出 A/B 方案後做出選擇並推進到執行，是最高效的使用模式</li>
   <li>將 AI 用於解決實際編譯問題（跨平台 #if 缺 fallback），產出可直接套用的 patch</li>
+  <li>嘗試讓 AI 讀取「正在預覽的腳本」，顯示在探索 AI 能力邊界</li>
 </ul>
 </div>
 
@@ -221,26 +267,37 @@
 <h3>共同特點</h3>
 <ul>
   <li>偏好讓 AI「<strong>先分析再動手</strong>」的工作流程 — 這是好的習慣，降低 AI 直接修改帶來的風險</li>
-  <li>對 AI 輸出的信任度分歧明顯：劉思源完全不讓 AI 改 code（人工把關最嚴），紀閎耀讓 AI 改但會糾正，高偉傑信任 AI 直接產出</li>
+  <li>對 AI 輸出的信任度分歧明顯：
+    <ul>
+      <li>劉思源完全不讓 AI 改 code（人工把關最嚴）— 9 輪對話全是「請分析…」、「請整理…」</li>
+      <li>紀閎耀讓 AI 改但會糾正 —
+        <div class="prompt">你這樣不就不能平滑 SyncWeatherState 是用來同步剛登入或剛回來時狀態</div>
+        <div class="prompt">客人不適合直接SetColor 1. 要平滑 2. 其他功能也有SetColor 如果在切換晝夜後使用那些功能顏色會跑掉</div></li>
+      <li>高偉傑信任 AI 直接產出 — AI 提供 A/B 方案後直接回覆「A」，讓 AI 執行修改</li>
+    </ul>
+  </li>
   <li>團隊中存在<strong>三種互補的使用風格</strong>：分析導向（劉思源）、協作修正型（紀閎耀）、效率執行型（高偉傑），可以作為培訓時的參考案例</li>
 </ul>
 
 <h3>常見阻礙</h3>
 <table>
-  <tr><th>問題</th><th>影響成員</th><th>建議</th></tr>
+  <tr><th>問題</th><th>影響成員</th><th>原文佐證</th><th>建議</th></tr>
   <tr>
     <td>工作區未同步，AI 找不到檔案</td>
     <td>趙健智</td>
+    <td><div class="prompt">幫我將PlotTalkPlayer.cs的Play函數，新增bool參數…</div>（AI 回覆：找不到檔案）</td>
     <td>確保 Cursor 開啟正確的專案根目錄，使用前先 sync 版控</td>
   </tr>
   <tr>
-    <td>對 AI 能力邊界不確定</td>
+    <td>對 AI 能力邊界不確定（Token/計費）</td>
     <td>紀閎耀</td>
+    <td><div class="prompt">你Token會用完嗎</div><div class="prompt">你目前的計費是免費嗎</div></td>
     <td>可在入門培訓中說明 Token/計費/上下文限制</td>
   </tr>
   <tr>
     <td>停留在「分析」階段，未進到「修改」</td>
     <td>劉思源、趙健智</td>
+    <td>—</td>
     <td>提供「分析→確認→修改→驗證」的標準工作流範本</td>
   </tr>
 </table>
@@ -264,17 +321,19 @@
 
 <div class="card">
 <h4>建議 2：Unity MCP 連線確認</h4>
-<p>紀閎耀的對話中確認了 Unity MCP 可以正常連線。建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接（可以問 AI「你現在有跟 Unity 連在一起嗎？」）。</p>
+<p>紀閎耀的對話中確認了 Unity MCP 可以正常連線：</p>
+<div class="prompt">你現在有感覺跟Unity連在一起嗎</div>
+<p>建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接。</p>
 </div>
 
 <h3>B. 使用技巧（提升效率）</h3>
 
 <div class="card">
 <h4>建議 3：善用 @ 語法指定檔案範圍</h4>
-<p>高偉傑的使用方式是很好的範例 — 用 <code>@UIGVECardOverviewMain.cs (1-382)</code> 明確指定要分析的檔案和行數。</p>
-<pre>✅ 好的用法：@BuildingManager.Floor.cs (1-213) 請幫我分析這個腳本
-⚠️ 一般用法：請分析 BuildingManager.Floor.cs
-❌ 較差用法：幫我看一下那個建築樓層的程式</pre>
+<p>高偉傑的使用方式是很好的範例 — 明確指定要分析的檔案和行數：</p>
+<div class="prompt">@BuildingManager.Floor.cs (1-213) @BuildingFloor.cs (1-279) 請幫我分析這兩個腳本</div>
+<div class="prompt">@UIGVECardOverviewMain.cs (1-382) 請幫我分析這個腳本</div>
+<p style="font-size:13px; color:var(--gray);">對比一般用法：「請分析 BuildingManager.Floor.cs」或較模糊的「幫我看一下那個建築樓層的程式」</p>
 </div>
 
 <div class="card">
@@ -292,23 +351,20 @@
 
 <div class="card">
 <h4>建議 5：給 AI 領域知識作為前提條件</h4>
-<p>紀閎耀在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼。建議在提問時主動提供：</p>
+<p>紀閎耀在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼：</p>
+<div class="prompt">嘗試找到該專案中 客人跟店員進出門那瞬間的判斷。要注意的是 IsIntoStore是正在店中活動的意思，店外也有商品 所以在門外IsIntoStore也可能是true</div>
+<p>建議在提問時主動提供：</p>
 <ul>
   <li>專案特有術語的解釋</li>
   <li>已知的約束條件</li>
   <li>不希望被改動的部分</li>
 </ul>
-<pre>✅ 好的範例：
-「尋找客人進出門的判斷。注意 IsIntoStore 是正在店中活動的意思，
- 店外也有商品，所以在門外 IsIntoStore 也可能是 true。」</pre>
 </div>
 
 <div class="card">
 <h4>建議 6：批次分析多個相關檔案</h4>
-<p>劉思源展示了很好的模式 — 從一個檔案開始，逐步展開到關聯類別。建議一次列出相關檔案：</p>
-<pre>✅ 好的做法：
-「請分析 PlotOptionPlayer.cs、PlotTalkPlayer.cs、PlotTitlePlayer.cs、
- PlotVideoPlayer.cs、UIPlotPlayer.cs，整理它們的職責分工與調用關係」</pre>
+<p>劉思源展示了很好的模式 — 從一個檔案開始，逐步展開到關聯類別，最終一次列出 5 個相關檔案：</p>
+<div class="prompt">請分析 PlotOptionPlayer.cs、PlotTalkPlayer.cs、PlotTitlePlayer.cs、PlotVideoPlayer.cs、UIPlotPlayer.cs</div>
 </div>
 
 <h3>C. 進階使用（提升價值）</h3>
