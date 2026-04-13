@@ -98,10 +98,10 @@
   </tr>
   <tr>
     <td><strong>高偉傑</strong></td>
-    <td>3 段對話（各 2~4 輪）</td>
-    <td>腳本分析、編譯修復、防呆重構</td>
-    <td><span class="badge badge-mid">中等</span></td>
-    <td><span class="badge badge-mid">中度</span></td>
+    <td>3 段對話（共 9 輪）</td>
+    <td>GamePass 系統分析、跨平台編譯修復、建築樓層防呆重構、GVE 卡牌 UI 分析</td>
+    <td><span class="badge badge-high">中高</span></td>
+    <td><span class="badge badge-deep">深度</span></td>
   </tr>
 </table>
 
@@ -125,7 +125,8 @@
 <ol>
   <li>確認 Unity MCP 連線狀態</li>
   <li>搜尋遊戲邏輯（客人/店員進出門判斷）</li>
-  <li>一般性問題（Token 限制、計費）</li>
+  <li>詢問 Token 限制</li>
+  <li>詢問計費方式</li>
   <li>天氣/晝夜系統整體規劃</li>
   <li>天氣/晝夜系統實作分析與染色方案</li>
   <li>糾正 AI 的 SyncWeatherState 平滑問題</li>
@@ -173,14 +174,20 @@
 <!-- 高偉傑 -->
 <div class="card">
 <h4>高偉傑 — 最完整的「分析→修改」流程</h4>
-<p><strong>使用模式：</strong>善用 <code>@</code> 語法附件檔案、從分析到修改的完整流程（分析 → 選方案 → 執行修改）。</p>
-<p><strong>具體場景：</strong></p>
+<p><strong>使用模式：</strong>善用 <code>@</code> 語法附件檔案、從分析到修改的完整流程（分析 → 選方案 → 執行修改），<span class="highlight">是唯一走完「分析→確認→選方案→執行修改」完整流程的成員</span>。</p>
+<p><strong>具體場景（3 段對話共 9 輪）：</strong></p>
 <ol>
-  <li>分析 GamePass 系統所有腳本（Manager / System / Data / Extension）</li>
-  <li>修復 <code>UIGamePassPanel</code> 跨平台編譯錯誤（<code>#if UNITY_ANDROID</code> 在 Win 平台的 fallback）</li>
-  <li>分析 <code>BuildingManager.Floor.cs</code> 與 <code>BuildingFloor.cs</code>，並讓 AI 做防呆重構（A 方案）</li>
-  <li>分析 <code>UIGVECardOverviewMain.cs</code> 與 <code>UIGVEStrengthen.cs</code></li>
+  <li><strong>第 1 段</strong>：分析 GamePass 系統所有腳本（Manager / System / Data / Extension）</li>
+  <li><strong>第 1 段</strong>：修復 <code>UIGamePassPanel</code> 跨平台編譯錯誤（<code>#if UNITY_ANDROID</code> 在 Win 平台的 fallback）</li>
+  <li><strong>第 2 段</strong>：分析 <code>BuildingManager.Floor.cs</code> 與 <code>BuildingFloor.cs</code>，選擇 A 方案（防呆重構），並讓 AI 執行修改</li>
+  <li><strong>第 3 段</strong>：分析 <code>UIGVECardOverviewMain.cs</code> 與 <code>UIGVEStrengthen.cs</code>（與劉思源獨立重疊，顯示不同成員有相同的分析需求）</li>
 </ol>
+<p><strong>亮點行為：</strong></p>
+<ul>
+  <li>善用 <code>@</code> 語法明確指定檔案範圍和行數，讓 AI 精準定位</li>
+  <li>能在 AI 給出 A/B 方案後做出選擇並推進到執行，是最高效的使用模式</li>
+  <li>將 AI 用於解決實際編譯問題（跨平台 #if 缺 fallback），產出可直接套用的 patch</li>
+</ul>
 </div>
 
 <hr class="divider">
@@ -208,17 +215,17 @@
   <tr><th>問題</th><th>影響成員</th><th>建議</th></tr>
   <tr>
     <td>工作區未同步，AI 找不到檔案</td>
-    <td>趙健智、紀閎耀</td>
+    <td>趙健智</td>
     <td>確保 Cursor 開啟正確的專案根目錄，使用前先 sync 版控</td>
   </tr>
   <tr>
     <td>對 AI 能力邊界不確定</td>
-    <td>劉思源</td>
+    <td>紀閎耀</td>
     <td>可在入門培訓中說明 Token/計費/上下文限制</td>
   </tr>
   <tr>
     <td>停留在「分析」階段，未進到「修改」</td>
-    <td>紀閎耀、趙健智</td>
+    <td>劉思源、趙健智</td>
     <td>提供「分析→確認→修改→驗證」的標準工作流範本</td>
   </tr>
 </table>
@@ -242,7 +249,7 @@
 
 <div class="card">
 <h4>建議 2：Unity MCP 連線確認</h4>
-<p>劉思源的對話中確認了 Unity MCP 可以正常連線。建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接（可以問 AI「你現在有跟 Unity 連在一起嗎？」）。</p>
+<p>紀閎耀的對話中確認了 Unity MCP 可以正常連線。建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接（可以問 AI「你現在有跟 Unity 連在一起嗎？」）。</p>
 </div>
 
 <h3>B. 使用技巧（提升效率）</h3>
@@ -260,7 +267,7 @@
 <p>目前團隊大部分使用停留在「請 AI 分析」的階段。建議嘗試以下流程：</p>
 <ol>
   <li><strong>分析</strong> →「請分析 XXX.cs 的職責與風險點」</li>
-  <li><strong>確認</strong> → 確認 AI 理解正確，如有誤差要糾正（像劉思源做的那樣）</li>
+  <li><strong>確認</strong> → 確認 AI 理解正確，如有誤差要糾正（像紀閎耀做的那樣）</li>
   <li><strong>方案選擇</strong> →「請給我 A/B 兩種修法」</li>
   <li><strong>執行修改</strong> →「請幫我做 A 方案的修改」</li>
   <li><strong>驗證</strong> → 確認修改後編譯通過、邏輯正確</li>
@@ -270,7 +277,7 @@
 
 <div class="card">
 <h4>建議 5：給 AI 領域知識作為前提條件</h4>
-<p>劉思源在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼。建議在提問時主動提供：</p>
+<p>紀閎耀在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼。建議在提問時主動提供：</p>
 <ul>
   <li>專案特有術語的解釋</li>
   <li>已知的約束條件</li>
@@ -308,7 +315,7 @@
 
 <div class="card">
 <h4>建議 9：新功能開發前先做技術方案討論</h4>
-<p>劉思源在晝夜系統的討論展示了 AI 在設計階段的價值。建議團隊在開發新功能前，先跟 AI 討論技術方案，獲得多種實作思路與 trade-off 分析。</p>
+<p>紀閎耀在晝夜系統的討論展示了 AI 在設計階段的價值。建議團隊在開發新功能前，先跟 AI 討論技術方案，獲得多種實作思路與 trade-off 分析。</p>
 </div>
 
 <div class="card">
@@ -316,7 +323,7 @@
 <ul>
   <li>不要詢問非技術問題（「Token 會不會用完」「是否免費」）— 消耗上下文空間</li>
   <li>不要在工作區未同步的情況下讓 AI 修改程式碼</li>
-  <li>不要盲目接受 AI 修改 — 應如劉思源所做，主動驗證 AI 輸出是否符合系統設計意圖</li>
+  <li>不要盲目接受 AI 修改 — 應如紀閎耀所做，主動驗證 AI 輸出是否符合系統設計意圖</li>
 </ul>
 </div>
 
