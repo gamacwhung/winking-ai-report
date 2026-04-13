@@ -73,28 +73,15 @@
 
 <table>
   <tr>
-    <th>成員</th><th>對話段數</th><th>主要使用場景</th><th>熟練度</th><th>使用深度</th>
-  </tr>
-  <tr>
-    <td><strong>劉思源</strong></td>
-    <td>1 段長對話（~13 輪）</td>
-    <td>編譯錯誤排查、UI 架構分析（GVE 卡牌/強化）、劇情系統分析、截圖腳本分析</td>
-    <td><span class="badge badge-high">中高</span></td>
-    <td><span class="badge badge-deep">深度</span></td>
+    <th>成員</th><th>對話段數</th><th>主要使用場景</th><th>熟練度</th><th>使用深度</th><th>區分關鍵</th>
   </tr>
   <tr>
     <td><strong>紀閎耀</strong></td>
     <td>1 段長對話（~10 輪）</td>
     <td>程式碼搜尋、晝夜/天氣系統設計、Shader 除錯、IDE 操作、糾正 AI 錯誤</td>
-    <td><span class="badge badge-high">中高</span></td>
+    <td><span class="badge" style="background:#16a34a">高</span></td>
     <td><span class="badge badge-deep">深度</span></td>
-  </tr>
-  <tr>
-    <td><strong>趙健智</strong></td>
-    <td>1 段短對話（1 輪）</td>
-    <td>程式碼修改（新增函式參數）</td>
-    <td><span class="badge badge-low">初階</span></td>
-    <td><span class="badge badge-low">淺度</span></td>
+    <td>唯一主動<strong>糾正 AI 錯誤</strong>並提供約束條件的成員</td>
   </tr>
   <tr>
     <td><strong>高偉傑</strong></td>
@@ -102,8 +89,30 @@
     <td>GamePass 系統分析、跨平台編譯修復、建築樓層防呆重構、GVE 卡牌 UI 分析</td>
     <td><span class="badge badge-high">中高</span></td>
     <td><span class="badge badge-deep">深度</span></td>
+    <td>唯一走完<strong>分析→選方案→執行修改</strong>完整流程</td>
+  </tr>
+  <tr>
+    <td><strong>劉思源</strong></td>
+    <td>1 段長對話（~13 輪）</td>
+    <td>編譯錯誤排查、UI 架構分析（GVE 卡牌/強化）、劇情系統分析、截圖腳本分析</td>
+    <td><span class="badge badge-mid">中等</span></td>
+    <td><span class="badge badge-mid">中度</span></td>
+    <td>輪數最多但<strong>全程分析未進到修改</strong>；善用截圖輸入</td>
+  </tr>
+  <tr>
+    <td><strong>趙健智</strong></td>
+    <td>1 段短對話（1 輪）</td>
+    <td>程式碼修改（新增函式參數）</td>
+    <td><span class="badge badge-low">初階</span></td>
+    <td><span class="badge badge-low">淺度</span></td>
+    <td>僅 1 次嘗試，因<strong>環境問題</strong>未能完成</td>
   </tr>
 </table>
+
+<p style="font-size:13px; color:var(--gray); margin-top:8px;">
+  <strong>熟練度</strong>定義：對 AI 工具的操作掌握程度（是否能糾正 AI、給予約束條件、使用 @ 語法等）。<br>
+  <strong>使用深度</strong>定義：是否走完「分析→修改」流程、涵蓋的系統/功能面向多寡。
+</p>
 
 <hr class="divider">
 
