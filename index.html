@@ -73,45 +73,46 @@
 
 <table>
   <tr>
-    <th>成員</th><th>對話段數</th><th>主要使用場景</th><th>熟練度</th><th>使用深度</th><th>區分關鍵</th>
-  </tr>
-  <tr>
-    <td><strong>紀閎耀</strong></td>
-    <td>1 段長對話（~10 輪）</td>
-    <td>程式碼搜尋、晝夜/天氣系統設計、Shader 除錯、IDE 操作、糾正 AI 錯誤</td>
-    <td><span class="badge" style="background:#16a34a">高</span></td>
-    <td><span class="badge badge-deep">深度</span></td>
-    <td>唯一主動<strong>糾正 AI 錯誤</strong>並提供約束條件的成員</td>
-  </tr>
-  <tr>
-    <td><strong>高偉傑</strong></td>
-    <td>3 段對話（共 9 輪）</td>
-    <td>GamePass 系統分析、跨平台編譯修復、建築樓層防呆重構、GVE 卡牌 UI 分析</td>
-    <td><span class="badge badge-high">中高</span></td>
-    <td><span class="badge badge-deep">深度</span></td>
-    <td>唯一走完<strong>分析→選方案→執行修改</strong>完整流程</td>
+    <th>成員</th><th>對話量</th><th>主要使用場景</th><th>使用風格</th><th>AI 介入程度</th><th>特色</th>
   </tr>
   <tr>
     <td><strong>劉思源</strong></td>
-    <td>1 段長對話（~13 輪）</td>
+    <td>1 段（~13 輪）</td>
     <td>編譯錯誤排查、UI 架構分析（GVE 卡牌/強化）、劇情系統分析、截圖腳本分析</td>
-    <td><span class="badge badge-mid">中等</span></td>
-    <td><span class="badge badge-mid">中度</span></td>
-    <td>輪數最多但<strong>全程分析未進到修改</strong>；善用截圖輸入</td>
+    <td><span class="badge" style="background:#16a34a">分析導向</span></td>
+    <td><span class="badge" style="background:#2563eb">僅分析</span></td>
+    <td>輪數最多；<strong>全程以 AI 做分析、人工決定是否修改</strong>，品質把關最嚴謹</td>
+  </tr>
+  <tr>
+    <td><strong>紀閎耀</strong></td>
+    <td>1 段（~10 輪）</td>
+    <td>程式碼搜尋、晝夜/天氣系統設計、Shader 除錯、IDE 操作</td>
+    <td><span class="badge" style="background:#7c3aed">協作修正型</span></td>
+    <td><span class="badge" style="background:#ea580c">分析+修改</span></td>
+    <td>讓 AI 修改後<strong>主動糾正錯誤</strong>；會給約束條件引導 AI</td>
+  </tr>
+  <tr>
+    <td><strong>高偉傑</strong></td>
+    <td>3 段（共 9 輪）</td>
+    <td>GamePass 分析、跨平台編譯修復、建築樓層重構、GVE UI 分析</td>
+    <td><span class="badge" style="background:#ea580c">效率執行型</span></td>
+    <td><span class="badge" style="background:#dc2626">分析+修改+產出</span></td>
+    <td>唯一走完<strong>分析→選方案→執行修改</strong>完整流程；效率最高但依賴 AI 品質</td>
   </tr>
   <tr>
     <td><strong>趙健智</strong></td>
-    <td>1 段短對話（1 輪）</td>
+    <td>1 段（1 輪）</td>
     <td>程式碼修改（新增函式參數）</td>
-    <td><span class="badge badge-low">初階</span></td>
-    <td><span class="badge badge-low">淺度</span></td>
-    <td>僅 1 次嘗試，因<strong>環境問題</strong>未能完成</td>
+    <td><span class="badge badge-low">嘗試中</span></td>
+    <td><span class="badge" style="background:#94a3b8">未完成</span></td>
+    <td>因環境問題（AI 找不到檔案）對話中斷</td>
   </tr>
 </table>
 
 <p style="font-size:13px; color:var(--gray); margin-top:8px;">
-  <strong>熟練度</strong>定義：對 AI 工具的操作掌握程度（是否能糾正 AI、給予約束條件、使用 @ 語法等）。<br>
-  <strong>使用深度</strong>定義：是否走完「分析→修改」流程、涵蓋的系統/功能面向多寡。
+  <strong>使用風格</strong>定義：該成員如何定位 AI 的角色。<br>
+  <strong>AI 介入程度</strong>定義：AI 是否有直接修改程式碼。介入越多效率越高，但品質越依賴事後驗證。<br>
+  <em>註：「僅分析」不代表深度不夠 — 劉思源以人工把關品質的方式使用 AI 分析結果，反而是風險最低的使用模式。</em>
 </p>
 
 <hr class="divider">
@@ -147,8 +148,8 @@
 
 <!-- 劉思源 -->
 <div class="card">
-<h4>劉思源 — 分析導向的多任務使用者</h4>
-<p><strong>使用模式：</strong>從編譯錯誤排查 → UI 架構分析 → 劇情系統分析 → 截圖讓 AI 分析腳本群，屬於<span class="highlight">分析導向的多任務型，善用不同輸入方式</span>。</p>
+<h4>劉思源 — 品質把關最嚴謹的使用者</h4>
+<p><strong>使用模式：</strong>從編譯錯誤排查 → UI 架構分析 → 劇情系統分析 → 截圖讓 AI 分析腳本群。<span class="highlight">全程僅使用 AI 做分析，由人工決定是否修改</span>，是風險最低的使用模式。</p>
 <p><strong>具體場景（~13 輪對話）：</strong></p>
 <ol>
   <li>解決 CS0246 編譯錯誤（<code>BuildingPositionConfig</code> 找不到）</li>
@@ -163,6 +164,7 @@
 </ol>
 <p><strong>亮點行為：</strong></p>
 <ul>
+  <li><strong>不讓 AI 直接修改程式碼</strong> — 全程以 AI 作為「分析助手」，自己掌控修改決策，確保程式碼品質</li>
   <li>善用「<strong>截圖</strong>」方式讓 AI 辨識 IDE 中的檔案清單並做推斷分析</li>
   <li>會從單一類別逐步要求整理「所有關聯類別的完整調用關係」</li>
   <li>持續深入追問同一個系統的不同面向</li>
@@ -214,9 +216,9 @@
 
 <h3>共同特點</h3>
 <ul>
-  <li>偏好讓 AI「<strong>先分析再動手</strong>」的工作流程</li>
-  <li>對 AI 輸出的信任度適中 — 紀閎耀會主動糾正，其他成員基本接受</li>
-  <li>使用方式較「被動」— 多半是「分析這個」「分析那個」，較少主動讓 AI 產生新程式碼</li>
+  <li>偏好讓 AI「<strong>先分析再動手</strong>」的工作流程 — 這是好的習慣，降低 AI 直接修改帶來的風險</li>
+  <li>對 AI 輸出的信任度分歧明顯：劉思源完全不讓 AI 改 code（人工把關最嚴），紀閎耀讓 AI 改但會糾正，高偉傑信任 AI 直接產出</li>
+  <li>團隊中存在<strong>三種互補的使用風格</strong>：分析導向（劉思源）、協作修正型（紀閎耀）、效率執行型（高偉傑），可以作為培訓時的參考案例</li>
 </ul>
 
 <h3>常見阻礙</h3>
