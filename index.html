@@ -69,7 +69,11 @@
 <!-- ============================== PART 1 ============================== -->
 <h2 id="part1">第一部分：內部說明 — 團隊 AI 使用現況總覽</h2>
 
-<p>本次分析共涵蓋 <strong>4 位成員、6 段對話紀錄</strong>，對方團隊使用 <strong>Cursor IDE + Unity MCP</strong> 進行 Unity C# 遊戲專案開發（模擬經營類遊戲，含 GVE 卡牌系統、商店系統、劇情系統、天氣/晝夜系統等模組）。</p>
+<p>本次分析共涵蓋 <strong>4 位成員、6 段對話、共 28 輪 user 訊息</strong>，對方團隊使用 <strong>Cursor IDE + Unity MCP</strong> 進行 Unity C# 遊戲專案開發（模擬經營類遊戲，含 GVE 卡牌系統、商店系統、劇情系統、天氣/晝夜系統等模組）。</p>
+
+<p style="background:#fef9c3; border-left:4px solid #ea580c; padding:10px 14px; border-radius:4px; font-size:14px;">
+  <strong>整體使用量偏保守：</strong>4 人在一天內僅產生 6 段對話（28 輪），其中有成員在對話中直接詢問「Token 會不會用完」「是否免費」，顯示團隊對 Token 額度與計費方式尚不清楚，可能影響使用意願與深度。
+</p>
 
 <table>
   <tr>
@@ -77,7 +81,7 @@
   </tr>
   <tr>
     <td><strong>劉思源</strong></td>
-    <td>1 段（~13 輪）</td>
+    <td>1 段（~9 輪）</td>
     <td>編譯錯誤排查、UI 架構分析（GVE 卡牌/強化）、劇情系統分析、截圖腳本分析</td>
     <td><span class="badge" style="background:#16a34a">分析導向</span></td>
     <td><span class="badge" style="background:#2563eb">僅分析</span></td>
@@ -93,7 +97,7 @@
   </tr>
   <tr>
     <td><strong>高偉傑</strong></td>
-    <td>3 段（共 9 輪）</td>
+    <td>3 段（共 8 輪）</td>
     <td>GamePass 分析、跨平台編譯修復、建築樓層重構、GVE UI 分析</td>
     <td><span class="badge" style="background:#ea580c">效率執行型</span></td>
     <td><span class="badge" style="background:#dc2626">分析+修改+產出</span></td>
@@ -150,7 +154,7 @@
 <div class="card">
 <h4>劉思源 — 品質把關最嚴謹的使用者</h4>
 <p><strong>使用模式：</strong>從編譯錯誤排查 → UI 架構分析 → 劇情系統分析 → 截圖讓 AI 分析腳本群。<span class="highlight">全程僅使用 AI 做分析，由人工決定是否修改</span>，是風險最低的使用模式。</p>
-<p><strong>具體場景（~13 輪對話）：</strong></p>
+<p><strong>具體場景（~9 輪對話）：</strong></p>
 <ol>
   <li>解決 CS0246 編譯錯誤（<code>BuildingPositionConfig</code> 找不到）</li>
   <li>分析 <code>UIGVECardOverviewMain.cs</code>（GVE 卡牌總覽 UI）的職責、資料流與風險點</li>
@@ -186,7 +190,7 @@
 <div class="card">
 <h4>高偉傑 — 最完整的「分析→修改」流程</h4>
 <p><strong>使用模式：</strong>善用 <code>@</code> 語法附件檔案、從分析到修改的完整流程（分析 → 選方案 → 執行修改），<span class="highlight">是唯一走完「分析→確認→選方案→執行修改」完整流程的成員</span>。</p>
-<p><strong>具體場景（3 段對話共 9 輪）：</strong></p>
+<p><strong>具體場景（3 段對話共 8 輪）：</strong></p>
 <ol>
   <li><strong>第 1 段</strong>：分析 GamePass 系統所有腳本（Manager / System / Data / Extension）</li>
   <li><strong>第 1 段</strong>：修復 <code>UIGamePassPanel</code> 跨平台編譯錯誤（<code>#if UNITY_ANDROID</code> 在 Win 平台的 fallback）</li>
