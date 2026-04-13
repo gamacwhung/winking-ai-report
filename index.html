@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>唯晶團隊 AI 使用分析報告 — 2026/04/10</title>
+<style>
+  :root { --primary: #2563eb; --dark: #1e293b; --gray: #64748b; --light: #f8fafc; --border: #e2e8f0; --green: #16a34a; --orange: #ea580c; --red: #dc2626; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "Segoe UI", sans-serif; color: var(--dark); background: #fff; line-height: 1.7; }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 32px; }
+  h1 { font-size: 28px; border-bottom: 3px solid var(--primary); padding-bottom: 12px; margin-bottom: 8px; }
+  .subtitle { color: var(--gray); font-size: 14px; margin-bottom: 36px; }
+  h2 { font-size: 22px; color: var(--primary); margin: 36px 0 16px; padding-left: 12px; border-left: 4px solid var(--primary); }
+  h3 { font-size: 17px; margin: 24px 0 10px; }
+  h4 { font-size: 15px; margin: 18px 0 8px; color: var(--gray); }
+  p, li { font-size: 15px; }
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 24px; margin-bottom: 12px; }
+  li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+  th { background: var(--primary); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--light); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #fff; }
+  .badge-high { background: var(--green); }
+  .badge-mid { background: var(--primary); }
+  .badge-low { background: var(--orange); }
+  .badge-deep { background: #7c3aed; }
+  .card { background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin: 14px 0; }
+  .card h4 { margin-top: 0; color: var(--dark); font-size: 16px; }
+  .highlight { background: #fef9c3; padding: 2px 6px; border-radius: 3px; }
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: Consolas, monospace; font-size: 13px; }
+  pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 10px 0 16px; font-size: 13px; line-height: 1.5; }
+  .toc { background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 20px 28px; margin: 20px 0 30px; }
+  .toc h3 { margin-top: 0; }
+  .toc ol { margin-bottom: 0; }
+  .toc a { color: var(--primary); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .divider { border: none; border-top: 2px solid var(--border); margin: 40px 0; }
+  .risk-tag { font-weight: 600; }
+  .risk-high { color: var(--red); }
+  .risk-mid { color: var(--orange); }
+  .risk-low { color: var(--gray); }
+  .chart-bar { display: flex; align-items: center; margin: 4px 0; }
+  .chart-bar .label { width: 140px; font-size: 13px; text-align: right; padding-right: 10px; }
+  .chart-bar .bar { height: 22px; border-radius: 4px; background: var(--primary); min-width: 4px; }
+  .chart-bar .val { font-size: 12px; margin-left: 8px; color: var(--gray); }
+  @media print { .container { padding: 20px; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>唯晶團隊 AI 輔助開發 — 使用分析報告</h1>
+<p class="subtitle">資料期間：2026/04/10 ｜ 分析日期：2026/04/13 ｜ 分析來源：Cursor Agent Transcripts</p>
+
+<div class="toc">
+<h3>目錄</h3>
+<ol>
+  <li><a href="#part1">第一部分：內部說明 — 團隊 AI 使用現況總覽</a></li>
+  <li><a href="#part2">第二部分：各成員詳細使用分析</a></li>
+  <li><a href="#part3">第三部分：團隊整體使用特徵與統計</a></li>
+  <li><a href="#part4">第四部分：給唯晶團隊的建議報告</a></li>
+  <li><a href="#part5">第五部分：觀察到的技術風險</a></li>
+</ol>
+</div>
+
+<!-- ============================== PART 1 ============================== -->
+<h2 id="part1">第一部分：內部說明 — 團隊 AI 使用現況總覽</h2>
+
+<p>本次分析共涵蓋 <strong>4 位成員、6 段對話紀錄</strong>，對方團隊使用 <strong>Cursor IDE + Unity MCP</strong> 進行 Unity C# 遊戲專案開發（模擬經營類遊戲，含 GVE 卡牌系統、商店系統、劇情系統、天氣/晝夜系統等模組）。</p>
+
+<table>
+  <tr>
+    <th>成員</th><th>對話段數</th><th>主要使用場景</th><th>熟練度</th><th>使用深度</th>
+  </tr>
+  <tr>
+    <td><strong>劉思源</strong></td>
+    <td>1 段長對話（~17 輪）</td>
+    <td>程式碼分析、架構整理、系統設計諮詢、Shader 問題、IDE 問答</td>
+    <td><span class="badge badge-high">中高</span></td>
+    <td><span class="badge badge-deep">深度</span></td>
+  </tr>
+  <tr>
+    <td><strong>紀閎耀</strong></td>
+    <td>1 段對話（~3 輪）</td>
+    <td>程式碼分析、優化建議</td>
+    <td><span class="badge badge-mid">中等</span></td>
+    <td><span class="badge badge-mid">中度</span></td>
+  </tr>
+  <tr>
+    <td><strong>趙健智</strong></td>
+    <td>1 段短對話（1 輪）</td>
+    <td>程式碼修改（新增函式參數）</td>
+    <td><span class="badge badge-low">初階</span></td>
+    <td><span class="badge badge-low">淺度</span></td>
+  </tr>
+  <tr>
+    <td><strong>高偉傑</strong></td>
+    <td>3 段對話（各 2~4 輪）</td>
+    <td>腳本分析、編譯修復、防呆重構</td>
+    <td><span class="badge badge-mid">中等</span></td>
+    <td><span class="badge badge-mid">中度</span></td>
+  </tr>
+</table>
+
+<hr class="divider">
+
+<!-- ============================== PART 2 ============================== -->
+<h2 id="part2">第二部分：各成員詳細使用分析</h2>
+
+<!-- 劉思源 -->
+<div class="card">
+<h4>劉思源 — 最深入的使用者</h4>
+<p><strong>使用模式：</strong>從編譯錯誤排查 → 程式碼架構分析 → 系統設計諮詢 → Shader/渲染技術方案，<span class="highlight">持續追問、逐層深入</span>。</p>
+<p><strong>亮點行為：</strong></p>
+<ul>
+  <li><strong>會主動糾正 AI 的錯誤</strong> — AI 把 <code>SyncWeatherState</code> 綁到事件上時，他指出「這樣不就不能平滑」，說明他清楚系統設計意圖</li>
+  <li><strong>會提供領域知識作為約束條件</strong> — 例如提醒「IsIntoStore 是正在店中活動的意思，門外也可能是 true」、「客人不適合直接 SetColor，因為其他功能也會用」</li>
+  <li><strong>會延伸探索</strong> — 從分析單一類別到要求整理所有關聯類別的完整調用關係</li>
+</ul>
+<p><strong>涵蓋的 AI 使用場景：</strong></p>
+<ol>
+  <li>解決 CS0246 編譯錯誤</li>
+  <li>分析 UI 腳本及完整調用鏈（UIGVECardOverviewMain 系列）</li>
+  <li>分析劇情系統（PlotManager / PlotSystem / 各種 Player）</li>
+  <li>天氣/晝夜系統設計與實作諮詢</li>
+  <li>搜尋遊戲邏輯（客人/店員進出門判斷）</li>
+  <li>Shader 渲染問題除錯（PostprocessingMode）</li>
+  <li>IDE 操作教學（Cursor 的 Go to Definition）</li>
+  <li>一般性問題（Token 限制、計費）</li>
+</ol>
+</div>
+
+<!-- 紀閎耀 -->
+<div class="card">
+<h4>紀閎耀</h4>
+<p><strong>使用模式：</strong>直接請 AI 分析指定腳本、要求「整理可以優化的部分」，屬於單次任務型。</p>
+<p><strong>具體場景：</strong></p>
+<ul>
+  <li>請 AI 分析 <code>PlotTalkPlayer.cs</code> 的 Play 函數並新增自動播放功能</li>
+  <li>遇到工作區未同步的問題，AI 找不到檔案，對話中斷</li>
+</ul>
+</div>
+
+<!-- 趙健智 -->
+<div class="card">
+<h4>趙健智</h4>
+<p><strong>使用模式：</strong>僅一次短對話，給出一個簡單的程式修改需求。</p>
+<p><strong>具體場景：</strong></p>
+<ul>
+  <li>希望在 <code>PlotTalkPlayer.cs</code> 的 Play 函數新增 bool 參數（自動播放下一句）</li>
+  <li>同樣因工作區路徑問題，AI 無法定位檔案</li>
+</ul>
+</div>
+
+<!-- 高偉傑 -->
+<div class="card">
+<h4>高偉傑 — 最完整的「分析→修改」流程</h4>
+<p><strong>使用模式：</strong>善用 <code>@</code> 語法附件檔案、從分析到修改的完整流程（分析 → 選方案 → 執行修改）。</p>
+<p><strong>具體場景：</strong></p>
+<ol>
+  <li>分析 GamePass 系統所有腳本（Manager / System / Data / Extension）</li>
+  <li>修復 <code>UIGamePassPanel</code> 跨平台編譯錯誤（<code>#if UNITY_ANDROID</code> 在 Win 平台的 fallback）</li>
+  <li>分析 <code>BuildingManager.Floor.cs</code> 與 <code>BuildingFloor.cs</code>，並讓 AI 做防呆重構（A 方案）</li>
+  <li>分析 <code>UIGVECardOverviewMain.cs</code> 與 <code>UIGVEStrengthen.cs</code></li>
+</ol>
+</div>
+
+<hr class="divider">
+
+<!-- ============================== PART 3 ============================== -->
+<h2 id="part3">第三部分：團隊整體使用特徵與統計</h2>
+
+<h3>AI 使用方向分布</h3>
+<div style="margin: 16px 0 24px;">
+  <div class="chart-bar"><span class="label">程式碼分析與理解</span><div class="bar" style="width:60%; background:#2563eb;"></div><span class="val">~60%</span></div>
+  <div class="chart-bar"><span class="label">程式碼修改與修復</span><div class="bar" style="width:25%; background:#7c3aed;"></div><span class="val">~25%</span></div>
+  <div class="chart-bar"><span class="label">系統設計諮詢</span><div class="bar" style="width:10%; background:#16a34a;"></div><span class="val">~10%</span></div>
+  <div class="chart-bar"><span class="label">工具使用諮詢</span><div class="bar" style="width:5%; background:#ea580c;"></div><span class="val">~5%</span></div>
+</div>
+
+<h3>共同特點</h3>
+<ul>
+  <li>偏好讓 AI「<strong>先分析再動手</strong>」的工作流程</li>
+  <li>對 AI 輸出的信任度適中 — 劉思源會主動糾正，其他成員基本接受</li>
+  <li>使用方式較「被動」— 多半是「分析這個」「分析那個」，較少主動讓 AI 產生新程式碼</li>
+</ul>
+
+<h3>常見阻礙</h3>
+<table>
+  <tr><th>問題</th><th>影響成員</th><th>建議</th></tr>
+  <tr>
+    <td>工作區未同步，AI 找不到檔案</td>
+    <td>趙健智、紀閎耀</td>
+    <td>確保 Cursor 開啟正確的專案根目錄，使用前先 sync 版控</td>
+  </tr>
+  <tr>
+    <td>對 AI 能力邊界不確定</td>
+    <td>劉思源</td>
+    <td>可在入門培訓中說明 Token/計費/上下文限制</td>
+  </tr>
+  <tr>
+    <td>停留在「分析」階段，未進到「修改」</td>
+    <td>紀閎耀、趙健智</td>
+    <td>提供「分析→確認→修改→驗證」的標準工作流範本</td>
+  </tr>
+</table>
+
+<hr class="divider">
+
+<!-- ============================== PART 4 ============================== -->
+<h2 id="part4">第四部分：給唯晶團隊的建議報告</h2>
+
+<h3>A. 環境設定（最優先）</h3>
+
+<div class="card">
+<h4>建議 1：確保工作區路徑正確且檔案已同步</h4>
+<p>部分成員使用時 AI 找不到指定腳本，通常是因為 Cursor 開啟的工作區路徑與實際專案路徑不一致，或檔案尚未加入版控。</p>
+<ul>
+  <li>確認 Cursor 開啟的資料夾是專案根目錄（例如 <code>GameProject/Model.Unity</code>）</li>
+  <li>使用前確認目標檔案已存在於工作區中</li>
+  <li>若使用 Perforce 或其他版控，先 sync 最新版本</li>
+</ul>
+</div>
+
+<div class="card">
+<h4>建議 2：Unity MCP 連線確認</h4>
+<p>劉思源的對話中確認了 Unity MCP 可以正常連線。建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接（可以問 AI「你現在有跟 Unity 連在一起嗎？」）。</p>
+</div>
+
+<h3>B. 使用技巧（提升效率）</h3>
+
+<div class="card">
+<h4>建議 3：善用 @ 語法指定檔案範圍</h4>
+<p>高偉傑的使用方式是很好的範例 — 用 <code>@UIGVECardOverviewMain.cs (1-382)</code> 明確指定要分析的檔案和行數。</p>
+<pre>✅ 好的用法：@BuildingManager.Floor.cs (1-213) 請幫我分析這個腳本
+⚠️ 一般用法：請分析 BuildingManager.Floor.cs
+❌ 較差用法：幫我看一下那個建築樓層的程式</pre>
+</div>
+
+<div class="card">
+<h4>建議 4：從「分析」進階到「修改」的完整工作流</h4>
+<p>目前團隊大部分使用停留在「請 AI 分析」的階段。建議嘗試以下流程：</p>
+<ol>
+  <li><strong>分析</strong> →「請分析 XXX.cs 的職責與風險點」</li>
+  <li><strong>確認</strong> → 確認 AI 理解正確，如有誤差要糾正（像劉思源做的那樣）</li>
+  <li><strong>方案選擇</strong> →「請給我 A/B 兩種修法」</li>
+  <li><strong>執行修改</strong> →「請幫我做 A 方案的修改」</li>
+  <li><strong>驗證</strong> → 確認修改後編譯通過、邏輯正確</li>
+</ol>
+<p>高偉傑在 <code>BuildingManager.Floor.cs</code> 的使用就是完美範例。</p>
+</div>
+
+<div class="card">
+<h4>建議 5：給 AI 領域知識作為前提條件</h4>
+<p>劉思源在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼。建議在提問時主動提供：</p>
+<ul>
+  <li>專案特有術語的解釋</li>
+  <li>已知的約束條件</li>
+  <li>不希望被改動的部分</li>
+</ul>
+<pre>✅ 好的範例：
+「尋找客人進出門的判斷。注意 IsIntoStore 是正在店中活動的意思，
+ 店外也有商品，所以在門外 IsIntoStore 也可能是 true。」</pre>
+</div>
+
+<div class="card">
+<h4>建議 6：批次分析多個相關檔案</h4>
+<p>劉思源展示了很好的模式 — 從一個檔案開始，逐步展開到關聯類別。建議一次列出相關檔案：</p>
+<pre>✅ 好的做法：
+「請分析 PlotOptionPlayer.cs、PlotTalkPlayer.cs、PlotTitlePlayer.cs、
+ PlotVideoPlayer.cs、UIPlotPlayer.cs，整理它們的職責分工與調用關係」</pre>
+</div>
+
+<h3>C. 進階使用（提升價值）</h3>
+
+<div class="card">
+<h4>建議 7：讓 AI 幫助建立程式碼文件</h4>
+<p>可以利用 AI 分析結果，直接產出：類別職責說明文件、系統間調用關係圖（Mermaid 格式）、新人上手指南。</p>
+</div>
+
+<div class="card">
+<h4>建議 8：利用 AI 做 Code Review</h4>
+<p>除了「請分析」之外，可以更具體地請 AI 檢查：</p>
+<ul>
+  <li>「這段程式有沒有記憶體洩漏的風險？」</li>
+  <li>「這個事件訂閱/取消訂閱是否對稱？」</li>
+  <li>「這段 DOTween 在物件 Disable 時會不會殘留？」</li>
+</ul>
+</div>
+
+<div class="card">
+<h4>建議 9：新功能開發前先做技術方案討論</h4>
+<p>劉思源在晝夜系統的討論展示了 AI 在設計階段的價值。建議團隊在開發新功能前，先跟 AI 討論技術方案，獲得多種實作思路與 trade-off 分析。</p>
+</div>
+
+<div class="card">
+<h4>建議 10：避免的使用方式</h4>
+<ul>
+  <li>不要詢問非技術問題（「Token 會不會用完」「是否免費」）— 消耗上下文空間</li>
+  <li>不要在工作區未同步的情況下讓 AI 修改程式碼</li>
+  <li>不要盲目接受 AI 修改 — 應如劉思源所做，主動驗證 AI 輸出是否符合系統設計意圖</li>
+</ul>
+</div>
+
+<hr class="divider">
+
+<!-- ============================== PART 5 ============================== -->
+<h2 id="part5">第五部分：觀察到的技術風險（供團隊參考）</h2>
+
+<p>在分析過程中，AI 反覆識別出幾個共同的程式碼品質議題：</p>
+
+<table>
+  <tr><th>風險等級</th><th>問題描述</th><th>涉及模組</th></tr>
+  <tr>
+    <td><span class="risk-tag risk-high">高</span></td>
+    <td>事件訂閱/取消訂閱不對稱 — 多處 <code>+=</code> 沒有對應的 <code>-=</code>，或在錯誤的生命週期解除</td>
+    <td>UIGVECardOverviewMain, UICard</td>
+  </tr>
+  <tr>
+    <td><span class="risk-tag risk-high">高</span></td>
+    <td>批次 RPC 回調造成多次 UI 刷新 — 銷毀卡牌等操作逐張發送，每次回調都重建 UI</td>
+    <td>UIGVECardOverviewMain</td>
+  </tr>
+  <tr>
+    <td><span class="risk-tag risk-mid">中</span></td>
+    <td>硬編碼數值 — 等級上限 <code>3</code>、<code>plotId == 0</code> 代表關閉等 magic number</td>
+    <td>UIGVEStrengthen, PlotManager</td>
+  </tr>
+  <tr>
+    <td><span class="risk-tag risk-mid">中</span></td>
+    <td>陣列長度未防護 — 多處假設陣列長度一致，缺少邊界檢查</td>
+    <td>PlotTalkPlayer, PlotOptionPlayer, BuildingManager.Floor</td>
+  </tr>
+  <tr>
+    <td><span class="risk-tag risk-mid">中</span></td>
+    <td>Dispose / 生命週期管理不完整 — 子系統未正確釋放</td>
+    <td>PlotManager, WeatherManager</td>
+  </tr>
+  <tr>
+    <td><span class="risk-tag risk-low">低</span></td>
+    <td>Shader 全域參數命名一致性 — <code>_TimeOfDay</code> 在不同 Shader 中需統一</td>
+    <td>Weather/DayNight 系統</td>
+  </tr>
+</table>
+
+<p>以上技術風險都是 AI 工具能很有效地協助識別與修復的領域，建議團隊優先處理高風險項目。</p>
+
+<hr class="divider">
+<p style="text-align:center; color:var(--gray); font-size:13px; margin-top:20px;">
+  本報告由 AI 輔助分析產生 ｜ 2026/04/13
+</p>
+
+</div>
+</body>
+</html>
