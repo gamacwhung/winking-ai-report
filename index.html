@@ -63,7 +63,7 @@
   <li><a href="#part1">第一部分：內部說明 — 團隊 AI 使用現況總覽</a></li>
   <li><a href="#part2">第二部分：各成員詳細使用分析</a></li>
   <li><a href="#part3">第三部分：團隊整體使用特徵與統計</a></li>
-  <li><a href="#part4">第四部分：給唯晶團隊的建議報告</a></li>
+  <li><a href="#part4">第四部分：整體建議 — 接下來怎麼做</a></li>
   <li><a href="#part5">第五部分：觀察到的技術風險</a></li>
 </ol>
 </div>
@@ -160,6 +160,15 @@
   <li>Shader 渲染問題除錯
     <div class="prompt">我發現 _PostprocessingMode Disable 之後整個模型是黑的，我有先設置 Camera HDR 為 Use settings from Render Pipeline Asset 並確認 Render Pipeline Asset 本身已啟用 HDR。</div></li>
 </ol>
+<p style="margin-top:14px;"><strong>💡 給紀閎耀的建議：</strong></p>
+<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:12px 16px; margin:6px 0;">
+<ul style="margin-bottom:0;">
+  <li>你已經是最深入的使用者，<strong>糾正 AI 錯誤的習慣非常好</strong>，請繼續保持</li>
+  <li>可以嘗試在提問時一次給完所有約束條件（例如把「要平滑」「其他功能也會 SetColor」寫在第一句），減少來回修正的輪數</li>
+  <li>晝夜系統這類大方向設計討論，可以先請 AI 列出 3 種方案的 pros/cons 再選，會更有效率</li>
+  <li>Token 和計費的問題問 AI 本身得不到準確答案，之後有疑問可以直接問我們團隊</li>
+</ul>
+</div>
 </div>
 
 <!-- 劉思源 -->
@@ -194,6 +203,15 @@
   <li>會從單一類別逐步要求整理「所有關聯類別的完整調用關係」</li>
   <li>持續深入追問同一個系統的不同面向</li>
 </ul>
+<p style="margin-top:14px;"><strong>💡 給劉思源的建議：</strong></p>
+<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:12px 16px; margin:6px 0;">
+<ul style="margin-bottom:0;">
+  <li>你的「<strong>只分析不讓 AI 改 code</strong>」風格是品質最穩的方式，非常值得肯定</li>
+  <li>可以嘗試讓 AI <strong>產出修改草稿但不自動 Apply</strong>（Cursor 有「不自動套用」的模式），你在 diff 上逐行審查後再手動接受，這樣既保留人工把關又能節省手動改寫的時間</li>
+  <li>你的「截圖讓 AI 辨識腳本」方式很有創意，但精度有限；建議搭配 <code>@檔名</code> 語法，AI 能讀到完整程式碼，分析結果會更精確</li>
+  <li>「請整理調用關係」的模式很好，可以再進一步要求 AI 輸出 Mermaid 圖，貼到文件裡變成可視化架構圖</li>
+</ul>
+</div>
 </div>
 
 <!-- 趙健智 -->
@@ -206,6 +224,15 @@
     <div class="prompt">幫我將PlotTalkPlayer.cs的Play函數，新增bool參數，可以自動播放下一句，而不用玩家主動點擊</div></li>
   <li>因工作區路徑問題，AI 無法定位檔案，對話中斷</li>
 </ul>
+<p style="margin-top:14px;"><strong>💡 給趙健智的建議：</strong></p>
+<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:12px 16px; margin:6px 0;">
+<ul style="margin-bottom:0;">
+  <li>你的需求描述其實很清楚（「新增 bool 參數 + 自動播放下一句」），<strong>問法沒有問題</strong></li>
+  <li>第一次使用時，先確認 Cursor 開啟的資料夾是<strong>專案根目錄</strong>（例如 <code>GameProject/Model.Unity</code>），這樣 AI 才能定位到檔案</li>
+  <li>建議嘗試 <code>@PlotTalkPlayer.cs</code> 語法直接把檔案餵給 AI，可以避免路徑問題</li>
+  <li>環境確認沒問題後，你下的 prompt 就能直接讓 AI 完成修改了，可以多試幾次建立信心</li>
+</ul>
+</div>
 </div>
 
 <!-- 高偉傑 -->
@@ -249,6 +276,15 @@
   <li>將 AI 用於解決實際編譯問題（跨平台 #if 缺 fallback），產出可直接套用的 patch</li>
   <li>嘗試讓 AI 讀取「正在預覽的腳本」，顯示在探索 AI 能力邊界</li>
 </ul>
+<p style="margin-top:14px;"><strong>💡 給高偉傑的建議：</strong></p>
+<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:12px 16px; margin:6px 0;">
+<ul style="margin-bottom:0;">
+  <li>你是<strong>唯一走完「分析→選方案→執行修改」完整流程</strong>的人，這個使用模式效率最高，請繼續保持</li>
+  <li><code>@檔名 (行數)</code> 語法用得很好；可以進一步嘗試一次附多個檔案讓 AI 做跨檔分析</li>
+  <li>AI 產出的 patch 建議在 Apply 前<strong>逐行 review diff</strong>，尤其是涉及跨平台或生命週期的修改（像 <code>#if UNITY_ANDROID</code> 那段）</li>
+  <li>效率型使用者的最大風險是漏掉 AI 的隱性錯誤 — 可以養成「改完後請 AI 再 review 一次自己的修改」的二次驗證習慣</li>
+</ul>
+</div>
 </div>
 
 <hr class="divider">
@@ -305,97 +341,77 @@
 <hr class="divider">
 
 <!-- ============================== PART 4 ============================== -->
-<h2 id="part4">第四部分：給唯晶團隊的建議報告</h2>
+<h2 id="part4">第四部分：整體建議 — 接下來怎麼做</h2>
 
-<h3>A. 環境設定（最優先）</h3>
+<div style="background:#f0fdf4; border:2px solid #86efac; border-radius:8px; padding:20px 24px; margin:16px 0;">
+<h3 style="margin-top:0; color:#15803d; border:none; padding-left:0;">🎯 核心判斷</h3>
+<p style="font-size:16px; line-height:1.8;">
+  這個團隊<strong>不是不會用 AI</strong>，而是<strong>還不確定能不能放心用</strong>。<br>
+  從對話記錄來看，4 位成員都能用中文自然地跟 AI 互動、描述需求也清楚，<br>
+  但整體使用量偏低（一天 28 輪），且有成員直接問「Token 會不會用完」。<br>
+  <strong>解除 Token 不確定性後，使用深度和頻率預期會自然提升。</strong>
+</p>
+</div>
 
+<h3>建議方向一：釐清 Token 與計費限制</h3>
 <div class="card">
-<h4>建議 1：確保工作區路徑正確且檔案已同步</h4>
-<p>部分成員使用時 AI 找不到指定腳本，通常是因為 Cursor 開啟的工作區路徑與實際專案路徑不一致，或檔案尚未加入版控。</p>
+<p><strong>問題：</strong>團隊成員不確定 Token 額度和計費方式，導致使用保守、不敢讓 AI 做更多事。</p>
+<div class="prompt">你Token會用完嗎</div>
+<div class="prompt">你目前的計費是免費嗎</div>
+<p><strong>建議做法：</strong></p>
 <ul>
-  <li>確認 Cursor 開啟的資料夾是專案根目錄（例如 <code>GameProject/Model.Unity</code>）</li>
-  <li>使用前確認目標檔案已存在於工作區中</li>
-  <li>若使用 Perforce 或其他版控，先 sync 最新版本</li>
+  <li>向團隊明確說明目前的 Token 額度、計費方式、用量上限</li>
+  <li>讓大家知道「正常開發使用不需要省」，降低心理門檻</li>
+  <li>如果有用量限制，告知大概能支撐多少對話量，避免成員做到一半擔心額度中斷</li>
 </ul>
 </div>
 
+<h3>建議方向二：場景化的 Prompt 教學</h3>
 <div class="card">
-<h4>建議 2：Unity MCP 連線確認</h4>
-<p>紀閎耀的對話中確認了 Unity MCP 可以正常連線：</p>
-<div class="prompt">你現在有感覺跟Unity連在一起嗎</div>
-<p>建議所有成員在開始使用前，都先確認 Unity Editor 是否正確連接。</p>
+<p><strong>問題：</strong>團隊目前以「分析」為主（佔 60%），還沒充分發揮 AI 在修改、設計、Review 上的潛力。</p>
+<p><strong>建議做法：</strong>針對他們實際的遊戲開發場景，提供具體的 prompt 範本。以下是從他們對話中提取的實際案例和建議進階寫法：</p>
+
+<table>
+  <tr><th>場景</th><th>他們目前的寫法</th><th>可以進階的寫法</th></tr>
+  <tr>
+    <td>分析程式碼</td>
+    <td><code>請分析 UIGVECardOverviewMain.cs</code></td>
+    <td><code>@UIGVECardOverviewMain.cs 請分析這個類別的職責、資料流向、跟哪些類別耦合，以及有沒有記憶體洩漏風險</code></td>
+  </tr>
+  <tr>
+    <td>修 Bug</td>
+    <td><code>在243行使用了 #if UNITY_ANDROID... 導致 Win 平台報錯</code></td>
+    <td><code>@UIGamePassPanel.cs (240-250) 這段 #if 在 Windows 平台沒有 fallback 導致 iapId 未定義，請幫我加上 #else 分支，不要改變 Android/iOS 的行為</code></td>
+  </tr>
+  <tr>
+    <td>系統設計</td>
+    <td><code>該做的有什麼</code></td>
+    <td><code>我要在 URP 專案中加入晝夜循環，影響對象包含客人、店員、貨架、建築外觀。目前已有天氣系統的 Shader 和 PS_Light。請列出 3 種實作方案的 pros/cons</code></td>
+  </tr>
+  <tr>
+    <td>重構</td>
+    <td><code>請幫我分析這兩個腳本</code> → <code>好</code> → <code>A</code></td>
+    <td><code>@BuildingManager.Floor.cs @BuildingFloor.cs 這兩個腳本負責樓層管理，請列出最需要加防呆的 3 個地方，給我修改方案但不要自動套用，我要逐一確認</code></td>
+  </tr>
+</table>
 </div>
 
-<h3>B. 使用技巧（提升效率）</h3>
-
+<h3>建議方向三：持續追蹤與 Review</h3>
 <div class="card">
-<h4>建議 3：善用 @ 語法指定檔案範圍</h4>
-<p>高偉傑的使用方式是很好的範例 — 明確指定要分析的檔案和行數：</p>
-<div class="prompt">@BuildingManager.Floor.cs (1-213) @BuildingFloor.cs (1-279) 請幫我分析這兩個腳本</div>
-<div class="prompt">@UIGVECardOverviewMain.cs (1-382) 請幫我分析這個腳本</div>
-<p style="font-size:13px; color:var(--gray);">對比一般用法：「請分析 BuildingManager.Floor.cs」或較模糊的「幫我看一下那個建築樓層的程式」</p>
-</div>
-
-<div class="card">
-<h4>建議 4：從「分析」進階到「修改」的完整工作流</h4>
-<p>目前團隊大部分使用停留在「請 AI 分析」的階段。建議嘗試以下流程：</p>
-<ol>
-  <li><strong>分析</strong> →「請分析 XXX.cs 的職責與風險點」</li>
-  <li><strong>確認</strong> → 確認 AI 理解正確，如有誤差要糾正（像紀閎耀做的那樣）</li>
-  <li><strong>方案選擇</strong> →「請給我 A/B 兩種修法」</li>
-  <li><strong>執行修改</strong> →「請幫我做 A 方案的修改」</li>
-  <li><strong>驗證</strong> → 確認修改後編譯通過、邏輯正確</li>
-</ol>
-<p>高偉傑在 <code>BuildingManager.Floor.cs</code> 的使用就是完美範例。</p>
-</div>
-
-<div class="card">
-<h4>建議 5：給 AI 領域知識作為前提條件</h4>
-<p>紀閎耀在搜尋「進出門判斷」時，先說明了 <code>IsIntoStore</code> 的真正語意，讓 AI 能更精準地找到正確的程式碼：</p>
-<div class="prompt">嘗試找到該專案中 客人跟店員進出門那瞬間的判斷。要注意的是 IsIntoStore是正在店中活動的意思，店外也有商品 所以在門外IsIntoStore也可能是true</div>
-<p>建議在提問時主動提供：</p>
+<p><strong>建議做法：</strong></p>
 <ul>
-  <li>專案特有術語的解釋</li>
-  <li>已知的約束條件</li>
-  <li>不希望被改動的部分</li>
+  <li>定期查看 agent-transcripts，了解使用狀況的變化（目前已在進行中）</li>
+  <li>觀察使用量和使用模式的演進 — 特別關注從「純分析」到「分析+修改」的比例是否提升</li>
+  <li>發現好的使用範例時，可以在團隊內分享，形成正向循環</li>
 </ul>
 </div>
 
-<div class="card">
-<h4>建議 6：批次分析多個相關檔案</h4>
-<p>劉思源展示了很好的模式 — 從一個檔案開始，逐步展開到關聯類別，最終一次列出 5 個相關檔案：</p>
-<div class="prompt">請分析 PlotOptionPlayer.cs、PlotTalkPlayer.cs、PlotTitlePlayer.cs、PlotVideoPlayer.cs、UIPlotPlayer.cs</div>
-</div>
-
-<h3>C. 進階使用（提升價值）</h3>
-
-<div class="card">
-<h4>建議 7：讓 AI 幫助建立程式碼文件</h4>
-<p>可以利用 AI 分析結果，直接產出：類別職責說明文件、系統間調用關係圖（Mermaid 格式）、新人上手指南。</p>
-</div>
-
-<div class="card">
-<h4>建議 8：利用 AI 做 Code Review</h4>
-<p>除了「請分析」之外，可以更具體地請 AI 檢查：</p>
-<ul>
-  <li>「這段程式有沒有記憶體洩漏的風險？」</li>
-  <li>「這個事件訂閱/取消訂閱是否對稱？」</li>
-  <li>「這段 DOTween 在物件 Disable 時會不會殘留？」</li>
-</ul>
-</div>
-
-<div class="card">
-<h4>建議 9：新功能開發前先做技術方案討論</h4>
-<p>紀閎耀在晝夜系統的討論展示了 AI 在設計階段的價值。建議團隊在開發新功能前，先跟 AI 討論技術方案，獲得多種實作思路與 trade-off 分析。</p>
-</div>
-
-<div class="card">
-<h4>建議 10：避免的使用方式</h4>
-<ul>
-  <li>不要詢問非技術問題（「Token 會不會用完」「是否免費」）— 消耗上下文空間</li>
-  <li>不要在工作區未同步的情況下讓 AI 修改程式碼</li>
-  <li>不要盲目接受 AI 修改 — 應如紀閎耀所做，主動驗證 AI 輸出是否符合系統設計意圖</li>
-</ul>
+<div style="background:#fefce8; border:2px solid #fde047; border-radius:8px; padding:18px 24px; margin:24px 0;">
+<h3 style="margin-top:0; color:#a16207; border:none; padding-left:0;">📌 一句話總結</h3>
+<p style="font-size:16px; line-height:1.8; margin-bottom:0;">
+  團隊的 AI 使用習慣與表達能力都沒問題，<strong>瓶頸在 Token 限制的不確定性</strong>。<br>
+  先讓他們安心用，再搭配場景化教學提升效率，效果會最明顯。
+</p>
 </div>
 
 <hr class="divider">
